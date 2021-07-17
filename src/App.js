@@ -1,39 +1,27 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import ContactEditor from './components/ContactEditor';
-import ContactList from './components/ContactList';
-import Finder from './components/Finder';
-import { contactOperations, contactSelectors } from './store/constact';
+import { Switch, Route } from 'react-router-dom';
+import AppBar from './components/AppBar';
+import ContactsView from './views/ContactsView';
+import RegisterView from './views/RegisterView';
+import LoginView from './views/LoginView';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.fetchContact();
-  }
-
   render() {
     return (
       <>
-        <h1>Phonebook </h1>
-        <ContactEditor />
-        <h2>Contacts</h2>
-        <Finder />
-        {this.props.isLoadingContacts && <h1>...Loading</h1>}
-        <ContactList />
+        <AppBar />
+
+        <Switch>
+          <Route path="/register" component={RegisterView} />
+          <Route path="/login" component={LoginView} />
+          <Route path="/contacts" component={ContactsView} />
+        </Switch>
       </>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  isLoadingContacts: contactSelectors.getLoading(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchContact: () => dispatch(contactOperations.fetchContact()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
 
 // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
 // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
