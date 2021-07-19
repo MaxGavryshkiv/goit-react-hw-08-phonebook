@@ -13,8 +13,6 @@ const {
   fetchContactError,
 } = contactAction;
 
-axios.defaults.baseURL = 'http://localhost:4040';
-
 const fetchContact = () => async dispatch => {
   dispatch(fetchContactRequest());
 
@@ -22,7 +20,7 @@ const fetchContact = () => async dispatch => {
     const { data } = await axios.get('/contacts');
     dispatch(fetchContactSuccess(data));
   } catch (error) {
-    dispatch(fetchContactError(error));
+    dispatch(fetchContactError(error.message));
   }
 };
 
@@ -38,7 +36,7 @@ const addContact = (name, number) => async dispatch => {
     const { data } = await axios.post('/contacts', contact);
     dispatch(addContactSuccess(data));
   } catch (error) {
-    dispatch(addContactError(error));
+    dispatch(addContactError(error.message));
   }
 };
 
