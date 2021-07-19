@@ -4,6 +4,8 @@ import AppBar from './components/AppBar';
 import ContactsView from './views/ContactsView';
 import RegisterView from './views/RegisterView';
 import LoginView from './views/LoginView';
+import { authOperations } from './store/auth';
+import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
@@ -21,7 +23,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
+};
+
+export default connect(null, mapDispatchToProps)(App);
 
 // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
 // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },

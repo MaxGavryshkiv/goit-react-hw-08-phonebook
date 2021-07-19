@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { authOperations } from '../store/auth';
 
 class LoginView extends Component {
   state = {
@@ -6,15 +8,32 @@ class LoginView extends Component {
     password: '',
   };
 
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    this.props.onLogin(this.state);
+
+    this.setState({ name: '', email: '', password: '' });
+  };
+
   render() {
     const { email, password } = this.state;
     return (
       <div>
         <h1>This Login Page</h1>
-        <form onSubmit={null}>
+        <form onSubmit={this.handleSubmit}>
           <label>
             Email
-            <input type="email" name="email" value={email} onChange={null} />
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={this.handleChange}
+            />
           </label>
           <label>
             Password
@@ -22,7 +41,7 @@ class LoginView extends Component {
               type="password"
               name="password"
               value={password}
-              onChange={null}
+              onChange={this.handleChange}
             />
           </label>
 
@@ -33,4 +52,8 @@ class LoginView extends Component {
   }
 }
 
-export default LoginView;
+const mapDispatchToProps = dispatch => ({
+  onLogin: data => dispatch(authOperations.logIn(data)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginView);
