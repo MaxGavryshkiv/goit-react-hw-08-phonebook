@@ -1,23 +1,41 @@
-import React, { Component } from 'react';
+import React, { lazy, Suspense, Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AppBar from './components/AppBar';
-import ContactsView from './views/ContactsView';
-import RegisterView from './views/RegisterView';
-import LoginView from './views/LoginView';
 import { authOperations } from './store/auth';
 import { connect } from 'react-redux';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+
+const ContactsView = lazy(() => import('./views/ContactsView'));
+const RegisterView = lazy(() => import('./views/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView'));
 
 class App extends Component {
   render() {
     return (
       <>
         <AppBar />
-
-        <Switch>
-          <Route path="/register" component={RegisterView} />
-          <Route path="/login" component={LoginView} />
-          <Route path="/contacts" component={ContactsView} />
-        </Switch>
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Switch>
+            <PublicRoute
+              path="/register"
+              restricted
+              redirectTo="/contacts"
+              component={RegisterView}
+            />
+            <PublicRoute
+              path="/login"
+              restricted
+              redirectTo="/contacts"
+              component={LoginView}
+            />
+            <PrivateRoute
+              path="/contacts"
+              redirectTo="/login"
+              component={ContactsView}
+            />
+          </Switch>
+        </Suspense>
       </>
     );
   }
