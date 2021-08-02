@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Form from 'react-bootstrap/Form';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { authOperations } from '../store/auth';
-
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
 
 class RegisterView extends Component {
   state = {
@@ -39,8 +30,19 @@ class RegisterView extends Component {
       <div>
         <h1>Страница регистрации</h1>
 
-        <form onSubmit={this.handleSubmit} style={styles.form}>
-          <label style={styles.label}>
+        <FloatingLabel
+          controlId="floatingInput"
+          label="Email address"
+          className="mb-3"
+        >
+          <Form.Control type="email" placeholder="name@example.com" />
+        </FloatingLabel>
+        <FloatingLabel controlId="floatingPassword" label="Password">
+          <Form.Control type="password" placeholder="Password" />
+        </FloatingLabel>
+
+        <Form onSubmit={this.handleSubmit}>
+          <label>
             Имя
             <input
               type="text"
@@ -50,7 +52,7 @@ class RegisterView extends Component {
             />
           </label>
 
-          <label style={styles.label}>
+          <label>
             Почта
             <input
               type="email"
@@ -60,7 +62,7 @@ class RegisterView extends Component {
             />
           </label>
 
-          <label style={styles.label}>
+          <label>
             Пароль
             <input
               type="password"
@@ -71,7 +73,7 @@ class RegisterView extends Component {
           </label>
 
           <button type="submit">Зарегистрироваться</button>
-        </form>
+        </Form>
       </div>
     );
   }

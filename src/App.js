@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import AppBar from './components/AppBar';
 import { authOperations } from './store/auth';
 import { connect } from 'react-redux';
@@ -11,6 +11,9 @@ const RegisterView = lazy(() => import('./views/RegisterView'));
 const LoginView = lazy(() => import('./views/LoginView'));
 
 class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
   render() {
     return (
       <>
