@@ -1,14 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+import { ButtonToolbar } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { authSelectors } from '../../store/auth';
 
 const Navigation = ({ isAuthenticated }) => (
   <nav>
     {isAuthenticated && (
-      <NavLink to="/contacts" exact>
-        Contacts
-      </NavLink>
+      <ButtonToolbar className="custom-btn-toolbar-contact">
+        <LinkContainer exact to="/contacts">
+          <Button>Contacts</Button>
+        </LinkContainer>
+      </ButtonToolbar>
     )}
   </nav>
 );

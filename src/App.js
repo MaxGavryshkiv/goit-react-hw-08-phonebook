@@ -5,6 +5,8 @@ import { authOperations } from './store/auth';
 import { connect } from 'react-redux';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const ContactsView = lazy(() => import('./views/ContactsView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
+import { Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import { authOperations } from '../store/auth';
 
@@ -28,51 +30,57 @@ class RegisterView extends Component {
 
     return (
       <div>
-        <h1>Страница регистрации</h1>
-
-        <FloatingLabel
-          controlId="floatingInput"
-          label="Email address"
-          className="mb-3"
-        >
-          <Form.Control type="email" placeholder="name@example.com" />
-        </FloatingLabel>
-        <FloatingLabel controlId="floatingPassword" label="Password">
-          <Form.Control type="password" placeholder="Password" />
-        </FloatingLabel>
-
-        <Form onSubmit={this.handleSubmit}>
-          <label>
-            Имя
-            <input
+        <h1 className="hedders">Register Page</h1>
+        <Form onSubmit={this.handleSubmit} className="Form">
+          <FloatingLabel
+            as={Col}
+            md="8"
+            controlId="floatingTextarea"
+            label="Name"
+            className="mb-3"
+          >
+            <Form.Control
               type="text"
               name="name"
               value={name}
               onChange={this.handleChange}
+              placeholder="Name"
             />
-          </label>
-
-          <label>
-            Почта
-            <input
+          </FloatingLabel>
+          <FloatingLabel
+            as={Col}
+            md="8"
+            controlId="floatingInput"
+            label="Email address"
+            className="mb-3"
+          >
+            <Form.Control
               type="email"
               name="email"
               value={email}
               onChange={this.handleChange}
+              placeholder="name@example.com"
             />
-          </label>
-
-          <label>
-            Пароль
-            <input
+          </FloatingLabel>
+          <FloatingLabel
+            as={Col}
+            md="8"
+            controlId="floatingPassword"
+            label="Password"
+            className="mb-3"
+          >
+            <Form.Control
               type="password"
               name="password"
               value={password}
               onChange={this.handleChange}
+              placeholder="Password"
             />
-          </label>
+          </FloatingLabel>
 
-          <button type="submit">Зарегистрироваться</button>
+          <Button md="2" type="submit">
+            Register
+          </Button>
         </Form>
       </div>
     );

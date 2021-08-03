@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
-
-import styles from './ContactList.module.css';
 
 import { contactOperations, contactSelectors } from '../../store/constact';
 
@@ -10,17 +9,17 @@ const ContactList = ({ contacts, onDeleteContact }) => (
   <>
     <ul>
       {contacts.map(({ id, name, number }) => (
-        <li key={id} className={styles.listItem}>
+        <li key={id}>
           <p>
             {name}:{number}
           </p>
-          <button
-            className={styles.bttn}
+          <Button
+            className="button"
             type="button"
             onClick={() => onDeleteContact(id)}
           >
             Удалить
-          </button>
+          </Button>
         </li>
       ))}
     </ul>

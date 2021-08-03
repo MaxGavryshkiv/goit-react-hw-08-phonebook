@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
 import { authSelectors, authOperations } from '../../store/auth';
 
 const UserMenu = ({ email, onLogout }) => (
-  <div>
+  <div className="UserMenu">
     <span>{email}</span>
-    <button type="button" onClick={onLogout}>
+    <Button className="ml5" type="button" onClick={onLogout}>
       Logout
-    </button>
+    </Button>
   </div>
 );
 

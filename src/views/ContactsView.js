@@ -13,12 +13,14 @@ class ContactsView extends Component {
   render() {
     return (
       <>
-        <h1>Phonebook </h1>
+        <h1 className="hedders">Phonebook </h1>
         <ContactEditor />
-        <h2>Contacts</h2>
-        <Finder />
-        {this.props.isLoadingContacts && <h1>...Loading</h1>}
-        <ContactList />
+        <div className="ContactList">
+          <h2 className="ml">Contacts</h2>
+          <Finder />
+          {this.props.isLoadingContacts && <h1>...Loading</h1>}
+          <ContactList />
+        </div>
       </>
     );
   }
